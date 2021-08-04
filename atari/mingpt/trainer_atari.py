@@ -65,8 +65,8 @@ class Trainer:
         # take over whatever gpus are on the system
         self.device = 'cpu'
         if torch.cuda.is_available():
-            self.device = torch.cuda.current_device()
-            self.model = torch.nn.DataParallel(self.model).to(self.device)
+            self.device = torch.device("cuda:4,5,6,7")
+            self.model = torch.nn.DataParallel(self.model,device_ids=[4,5,6,7])
 
     def save_checkpoint(self):
         # DataParallel wrappers keep raw model object in .module attribute
